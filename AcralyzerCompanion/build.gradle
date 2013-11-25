@@ -31,4 +31,6 @@ dependencies {
 	compile 'com.android.support:support-v4:19.0.0'
 	compile 'com.android.support:appcompat-v7:19.0.0'
     compile 'ch.acra:acra:4.5.0'
+    compile 'org.ektorp:org.ektorp:1.4.1'
+    compile 'org.ektorp:org.ektorp.android:1.4.1'
 }

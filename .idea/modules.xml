@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AcralyzerCompanion/AcralyzerCompanion.iml" filepath="$PROJECT_DIR$/AcralyzerCompanion/AcralyzerCompanion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AcralyzerCompanionProject.iml" filepath="$PROJECT_DIR$/AcralyzerCompanionProject.iml" />
+    </modules>
+  </component>
+</project>
+

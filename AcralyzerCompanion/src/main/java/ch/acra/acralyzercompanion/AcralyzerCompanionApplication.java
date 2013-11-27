@@ -18,13 +18,20 @@ package ch.acra.acralyzercompanion;
  along with AcralyzerCompanion.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.SystemClock;
+import android.util.Log;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.acra.sender.HttpSender;
 
+import ch.acra.acralyzercompanion.service.AcralyzerPollingService;
 import secret.Credentials;
 
 @ReportsCrashes(formKey = "", httpMethod = HttpSender.Method.PUT,
@@ -37,9 +44,22 @@ import secret.Credentials;
         mode = ReportingInteractionMode.TOAST)
 public class AcralyzerCompanionApplication extends Application {
 
+    private static final String TAG = "AcralyzerCompanionApplication";
+
     @Override
     public void onCreate() {
         super.onCreate();
         ACRA.init(this);
+        scheduleServices(this);
+    }
+
+    public static void scheduleServices(Context context) {
+        Log.w(TAG, "scheduling service...");
+        Intent iStartService = new Intent(context, AcralyzerPollingService.class);
+        PendingIntent piStartService = PendingIntent.getService(context, 0, iStartService, 0);
+        AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarm.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() +
+                60 * 1000, AlarmManager.INTERVAL_HALF_HOUR / 60, piStartService);
+
     }
 }
